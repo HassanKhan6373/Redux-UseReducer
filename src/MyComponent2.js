@@ -1,7 +1,11 @@
-import React, { useReducer } from "react";
+import React, { useState, useReducer, useContext } from "react";
 import reducer from "./UseReducer/reducer";
+import { IssueContext } from "./Use-ContextAPI/sharedservices";
 
 const Counter = () => {
+  const { issue, issueCount } = useContext(IssueContext);
+  // const [issue, setissue] = useState(0);
+
   const initialState = { count: 0, cart: [] };
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -22,6 +26,11 @@ const Counter = () => {
     dispatch({ type: "REMOVE_FROM_CART", payload: item });
   };
 
+  // const issueCount = () => {
+  //   setissue(issue + 1);
+
+  // };
+
   return (
     <div>
       <p>Count: {state.count}</p>
@@ -41,6 +50,11 @@ const Counter = () => {
       </ul>
 
       <button onClick={addToCart}>Add to Cart</button>
+
+      <p>
+        {issue} {issue === 1 ? "issue" : "issues"}
+      </p>
+      <button onClick={issueCount}>Issue Count</button>
     </div>
   );
 };
